@@ -169,6 +169,38 @@ exit:
 }
 /* END_CASE */
 
+/* BEGIN_CASE */
+void ctr_drbg_accessors( )
+{
+    mbedtls_ctr_drbg_context ctx;
+
+    int resistance = mbedtls_ctr_drbg_get_prediction_resistance( &ctx );
+    size_t len = mbedtls_ctr_drbg_get_entropy_len( &ctx );
+    int interval = mbedtls_ctr_drbg_get_reseed_interval( &ctx );
+
+    mbedtls_ctr_drbg_init( &ctx );
+
+    /* Test defaults */
+    TEST_ASSERT( mbedtls_ctr_drbg_get_prediction_resistance( &ctx ) == resistance );
+    TEST_ASSERT( mbedtls_ctr_drbg_get_entropy_len( &ctx ) == len );
+    TEST_ASSERT( mbedtls_ctr_drbg_get_reseed_interval( &ctx ) == interval );
+
+    /* Change defaults */
+    mbedtls_ctr_drbg_set_prediction_resistance( &ctx, !resistance );
+    mbedtls_ctr_drbg_set_entropy_len( &ctx, len * 2 );
+    mbedtls_ctr_drbg_set_reseed_interval( &ctx, interval * 10 );
+
+    /* Test new values. */
+    TEST_ASSERT( mbedtls_ctr_drbg_get_prediction_resistance( &ctx ) == !resistance );
+    TEST_ASSERT( mbedtls_ctr_drbg_get_entropy_len( &ctx ) == len * 2 );
+    TEST_ASSERT( mbedtls_ctr_drbg_get_reseed_interval( &ctx ) == interval * 10 );
+
+exit:
+    mbedtls_ctr_drbg_free( &ctx );
+}
+/* END_CASE */
+
+
 /* BEGIN_CASE depends_on:MBEDTLS_FS_IO */
 void ctr_drbg_seed_file( char *path, int ret )
 {

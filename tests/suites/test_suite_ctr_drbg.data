@@ -721,6 +721,9 @@ ctr_drbg_validate_nopr:"50de72903b9d99764123ffaa0c721e14ad1ab5c46a34c040f25324ba
 CTR_DRBG entropy usage
 ctr_drbg_entropy_usage:
 
+CTR_DRBG accessors
+ctr_drbg_accessors:
+
 CTR_DRBG write/update seed file
 ctr_drbg_seed_file:"data_files/ctr_drbg_seed":0
 
