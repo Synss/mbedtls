@@ -150,6 +150,37 @@ int mbedtls_ctr_drbg_seed( mbedtls_ctr_drbg_context *ctx,
 void mbedtls_ctr_drbg_free( mbedtls_ctr_drbg_context *ctx );
 
 /**
+ * \brief               Return the state of the prediction resistance.
+ *
+ *
+ * \param ctx           CTR_DRBG context
+ *
+ * \return              resistance (MBEDTLS_CTR_DRBG_PR_ON or
+ *                      MBEDTLS_CTR_DRBG_PR_OFF)
+ */
+int mbedtls_ctr_drbg_get_prediction_resistance( const mbedtls_ctr_drbg_context *ctx );
+
+/**
+ * \brief               Return the amount of entropy grabbed on each (re)seed.
+ *
+ *
+ * \param ctx           CTR_DRBG context
+ *
+ * \return              Amount of entropy to grab
+ */
+size_t mbedtls_ctr_drbg_get_entropy_len( const mbedtls_ctr_drbg_context *ctx );
+
+/**
+ * \brief               Return the reseed interval
+ *
+ *
+ * \param ctx           CTR_DRBG context
+ *
+ * \return              Reseed interval
+ */
+int mbedtls_ctr_drbg_get_reseed_interval( const mbedtls_ctr_drbg_context *ctx );
+
+/**
  * \brief               Enable / disable prediction resistance (Default: Off)
  *
  * Note: If enabled, entropy is used for ctx->entropy_len before each call!

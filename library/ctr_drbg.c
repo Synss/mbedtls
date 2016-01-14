@@ -124,6 +124,21 @@ void mbedtls_ctr_drbg_free( mbedtls_ctr_drbg_context *ctx )
     mbedtls_zeroize( ctx, sizeof( mbedtls_ctr_drbg_context ) );
 }
 
+int mbedtls_ctr_drbg_get_prediction_resistance( const mbedtls_ctr_drbg_context *ctx )
+{
+	return ctx->prediction_resistance;
+}
+
+size_t mbedtls_ctr_drbg_get_entropy_len( const mbedtls_ctr_drbg_context *ctx)
+{
+	return ctx->entropy_len;
+}
+
+int mbedtls_ctr_drbg_get_reseed_interval( const mbedtls_ctr_drbg_context *ctx )
+{
+	return ctx->reseed_interval;
+}
+
 void mbedtls_ctr_drbg_set_prediction_resistance( mbedtls_ctr_drbg_context *ctx, int resistance )
 {
     ctx->prediction_resistance = resistance;
